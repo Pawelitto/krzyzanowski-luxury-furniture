@@ -4,5 +4,10 @@
     "projects": "Realizacje",
     "partners": "Partnerzy",
     "contact": "Kontakt"
+  },
+  "language_names": {
+    "pl-PL": "Polski",
+    "en-US": "Angielski",
+    "de-DE": "Niemiecki"
   }
 }

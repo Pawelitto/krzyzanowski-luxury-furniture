@@ -32,6 +32,7 @@ const links = computed(() => [
     </template>
 
     <template #right>
+      <LangSwitcher />
       <UColorModeButton />
     </template>
   </UHeader>

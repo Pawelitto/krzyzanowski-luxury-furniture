@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { locales, locale, setLocale } = useI18n();
+const { t, locales, locale, setLocale } = useI18n();
 
 const language = computed({
   get: () => locale.value,
@@ -9,14 +9,16 @@ const language = computed({
 });
 </script>
 <template>
-  <div>Switch Language</div>
-  <select v-model="language">
-    <option
-      v-for="item in locales"
-      :key="typeof item === 'object' ? item.code : item"
-      :value="typeof item === 'object' ? item.code : item"
-    >
-      {{ typeof item === "object" ? item.name : item }}
-    </option>
-  </select>
+  <ClientOnly>
+    <select v-model="language">
+      <option
+        v-for="item in locales"
+        :key="item.code"
+        :value="item.code"
+        class="flex items-center"
+      >
+        {{ t(`language_names.${item.code}`) }}
+      </option>
+    </select>
+  </ClientOnly>
 </template>
