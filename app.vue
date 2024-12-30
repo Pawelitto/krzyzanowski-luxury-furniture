@@ -28,6 +28,11 @@ const links = computed(() => [
   },
 ]);
 
+const path =
+  process.env.NODE_ENV === "production"
+    ? "https://krzyzanowski-luxuryfurniture.com"
+    : "http://localhost:3000";
+
 useHead({
   meta: [
     { charset: "utf-8" },
@@ -39,6 +44,18 @@ useHead({
   htmlAttrs: {
     lang: locales.value.find((l) => l.code === locale.value)?.lang,
   },
+});
+
+useSeoMeta({
+  titleTemplate: "Krzyżanowski Luxury Furniture %s",
+  ogTitle: t("seo.title"),
+  twitterTitle: t("seo.title"),
+  twitterCard: "summary_large_image",
+  ogImage: `${path}/banner.png`,
+  twitterImage: `${path}/banner.png`,
+  description: t("seo.description"),
+  ogDescription: t("seo.description"),
+  twitterDescription: t("seo.description"),
 });
 </script>
 
