@@ -2,7 +2,12 @@
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
 
-const { t } = useI18n();
+const { t, locale, locales } = useI18n();
+const colorMode = useColorMode();
+
+const color = computed(() =>
+  colorMode.value === "dark" ? "#1c1917" : "white"
+);
 
 const links = computed(() => [
   {
@@ -22,6 +27,19 @@ const links = computed(() => [
     icon: "i-heroicons-phone-16-solid",
   },
 ]);
+
+useHead({
+  meta: [
+    { charset: "utf-8" },
+    { name: "viewport", content: "width=device-width, initial-scale=1" },
+    { key: "theme-color", name: "theme-color", content: color },
+  ],
+  link: [{ rel: "icon", href: "/favicon.ico" }],
+
+  htmlAttrs: {
+    lang: locales.value.find((l) => l.code === locale.value)?.lang,
+  },
+});
 </script>
 
 <template>
