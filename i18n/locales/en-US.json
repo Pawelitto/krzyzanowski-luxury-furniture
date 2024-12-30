@@ -1,6 +1,8 @@
 {
-  "home_title": "Home",
-  "home_btn": "Go to Home",
-  "about_title": "About",
-  "about_btn": "Go to About"
+  "navbar_links": {
+    "home": "Home",
+    "projects": "Projects",
+    "partners": "Partners",
+    "contact": "Contact"
+  }
 }

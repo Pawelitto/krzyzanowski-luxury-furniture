@@ -1,28 +1,27 @@
-<script setup lang="ts">
-const links = [
+<script setup>
+import { useI18n } from "vue-i18n";
+import { computed } from "vue";
+
+const { t } = useI18n();
+
+const links = computed(() => [
   {
-    label: "Documentation",
-    icon: "i-heroicons-book-open",
+    label: t("navbar_links.home"),
+    icon: "i-heroicons-home-solid",
   },
   {
-    label: "Playground",
-    icon: "i-simple-icons-stackblitz",
+    label: t("navbar_links.projects"),
+    icon: "i-heroicons-check-badge-16-solid",
   },
   {
-    label: "Roadmap",
-    icon: "i-heroicons-map",
+    label: t("navbar_links.partners"),
+    icon: "i-heroicons-user-group-20-solid",
   },
   {
-    label: "Pro",
-    icon: "i-heroicons-square-3-stack-3d",
+    label: t("navbar_links.contact"),
+    icon: "i-heroicons-phone-16-solid",
   },
-  {
-    label: "Releases",
-    icon: "i-heroicons-rocket-launch",
-    to: "https://github.com/nuxt/ui/releases",
-    target: "_blank",
-  },
-];
+]);
 </script>
 
 <template>
@@ -34,14 +33,6 @@ const links = [
 
     <template #right>
       <UColorModeButton />
-
-      <UButton
-        icon="i-simple-icons-github"
-        to="https://github.com/nuxt/nuxt"
-        target="_blank"
-        color="gray"
-        variant="ghost"
-      />
     </template>
   </UHeader>
 

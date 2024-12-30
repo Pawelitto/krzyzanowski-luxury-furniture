@@ -1,6 +1,8 @@
 {
-  "home_title": "Startseite",
-  "home_btn": "Zur Startseite",
-  "about_title": "Über uns",
-  "about_btn": "Gehe zu Über uns"
+  "navbar_links": {
+    "home": "Startseite",
+    "projects": "Projekte",
+    "partners": "Partner",
+    "contact": "Kontakt"
+  }
 }
