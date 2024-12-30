@@ -25,7 +25,23 @@ const links = computed(() => [
 </script>
 
 <template>
-  <UHeader :links="links">
+  <UHeader
+    :links="links"
+    v-motion="{
+      initial: {
+        y: -50,
+        opacity: 0,
+      },
+      enter: {
+        y: 0,
+        opacity: 1,
+        transition: {
+          delay: 200,
+        },
+      },
+      preset: 'visible-once',
+    }"
+  >
     <template #logo>
       Nuxt UI Pro
       <!-- <Logo class="w-auto h-6" /> -->
@@ -34,6 +50,33 @@ const links = computed(() => [
     <template #right>
       <LangSwitcher />
       <UColorModeButton />
+    </template>
+
+    <template #panel>
+      <ul class="space-y-2 px-3">
+        <li
+          v-for="(item, index) in links"
+          :key="item.label"
+          v-motion="{
+            initial: {
+              y: -20,
+              opacity: 0,
+            },
+            enter: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                delay: 250 * index,
+              },
+            },
+            preset: 'visible-once',
+          }"
+          class="flex items-center justify-start space-x-3"
+        >
+          <UIcon :name="item.icon" class="w-5 h-5" />
+          <ULink>{{ item.label }}</ULink>
+        </li>
+      </ul>
     </template>
   </UHeader>
 

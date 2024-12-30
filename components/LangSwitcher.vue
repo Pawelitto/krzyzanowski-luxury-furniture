@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t, locales, locale, setLocale } = useI18n();
@@ -31,9 +31,20 @@ const selected = computed({
 </script>
 
 <template>
-  <USelectMenu v-model="selected" :options="languageOptions">
+  <USelectMenu
+    v-model="selected"
+    :options="languageOptions"
+    :ui="{ base: 'min-h-7' }"
+  >
     <template #leading>
       <UIcon v-if="selected?.icon" :name="selected?.icon" class="w-5 h-5" />
+    </template>
+    <template #label>
+      <span class="hidden md:flex">{{ selected?.label }}</span>
+    </template>
+    <template #option="{ option }">
+      <UIcon :name="option.icon" class="w-5 h-5" />
+      <span class="hidden md:flex">{{ option.label }}</span>
     </template>
   </USelectMenu>
 </template>

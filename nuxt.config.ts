@@ -3,7 +3,12 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
   extends: ["@nuxt/ui-pro"],
-  modules: ["@nuxt/ui", "@nuxtjs/i18n", "@nuxtjs/tailwindcss"],
+  modules: [
+    "@nuxt/ui",
+    "@nuxtjs/i18n",
+    "@nuxtjs/tailwindcss",
+    "@vueuse/motion/nuxt",
+  ],
   i18n: {
     lazy: true,
     langDir: "./locales",
