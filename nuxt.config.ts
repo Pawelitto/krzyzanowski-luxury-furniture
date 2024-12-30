@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxtjs/tailwindcss",
     "@vueuse/motion/nuxt",
+    "@nuxtjs/seo",
   ],
   i18n: {
     lazy: true,
