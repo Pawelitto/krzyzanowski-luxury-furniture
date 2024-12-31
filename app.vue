@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
 
@@ -57,6 +57,25 @@ useSeoMeta({
   ogDescription: t("seo.description"),
   twitterDescription: t("seo.description"),
 });
+
+useSchemaOrg([
+  defineQuestion({
+    name: t("faq.questions[0].question"),
+    acceptedAnswer: t("faq.questions[0].answer"),
+  }),
+  defineQuestion({
+    name: t("faq.questions[1].question"),
+    acceptedAnswer: t("faq.questions[1].answer"),
+  }),
+  defineQuestion({
+    name: t("faq.questions[2].question"),
+    acceptedAnswer: t("faq.questions[2].answer"),
+  }),
+  defineQuestion({
+    name: t("faq.questions[3].question"),
+    acceptedAnswer: t("faq.questions[3].answer"),
+  }),
+]);
 </script>
 
 <template>

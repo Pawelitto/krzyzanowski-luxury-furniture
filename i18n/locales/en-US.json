@@ -3,6 +3,26 @@
     "title": "Krzyżanowski Luxury Furniture – Luxury Custom-Made Furniture",
     "description": "Exclusive kitchens, wardrobes, and custom-made furniture. Krzyżanowski Luxury Furniture – style, quality, and unique designs for your home."
   },
+  "faq": {
+    "questions": [
+      {
+        "question": "Do you offer on-site measurements?",
+        "answer": "Yes, we provide comprehensive service – we come to your location and take precise measurements ourselves to ensure the perfect fit of our furniture."
+      },
+      {
+        "question": "Do you collaborate with design studios?",
+        "answer": "Of course! We work with renowned design studios to create unique projects tailored to the individual needs and visions of our clients."
+      },
+      {
+        "question": "Can we see material samples?",
+        "answer": "Yes, we have a wide selection of material samples, including Forner brand and many others. This allows you to see and choose materials that are perfect for your project."
+      },
+      {
+        "question": "What materials do you work with?",
+        "answer": "We work exclusively with high-quality materials such as Forner boards, Blum fittings, and Salice systems. This ensures that our furniture is durable, functional, and aesthetically pleasing."
+      }
+    ]
+  },
   "navbar_links": {
     "home": "Home",
     "projects": "Projects",
