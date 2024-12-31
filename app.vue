@@ -43,8 +43,7 @@ const links = computed(() => [
     }"
   >
     <template #logo>
-      Nuxt UI Pro
-      <!-- <Logo class="w-auto h-6" /> -->
+      <LogoTheme />
     </template>
 
     <template #right>
