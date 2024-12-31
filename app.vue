@@ -97,8 +97,9 @@ useSchemaOrg([
     }"
   >
     <template #logo>
-      Nuxt UI Pro
-      <!-- <Logo class="w-auto h-6" /> -->
+      <ClientOnly>
+        <LogoTheme />
+      </ClientOnly>
     </template>
 
     <template #right>
