@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxtjs/tailwindcss",
     "@vueuse/motion/nuxt",
+    "@nuxtjs/seo",
   ],
   i18n: {
     lazy: true,
@@ -15,6 +16,7 @@ export default defineNuxtConfig({
     strategy: "no_prefix",
     locales: [
       {
+        lang: "en",
         code: "en-US",
         iso: "en-US",
         name: "English",
@@ -22,6 +24,7 @@ export default defineNuxtConfig({
         icon: "i-twemoji-flag-for-flag-united-kingdom",
       },
       {
+        lang: "de",
         code: "de-DE",
         iso: "de-DE",
         name: "Deutschland",
@@ -29,6 +32,7 @@ export default defineNuxtConfig({
         icon: "i-twemoji-flag-germany",
       },
       {
+        lang: "pl",
         code: "pl-PL",
         iso: "pl-PL",
         name: "Polish",
