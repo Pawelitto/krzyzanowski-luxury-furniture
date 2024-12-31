@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@vueuse/motion/nuxt",
     "@nuxtjs/seo",
+    "@nuxt/image",
   ],
   i18n: {
     lazy: true,
