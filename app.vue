@@ -13,18 +13,22 @@ const links = computed(() => [
   {
     label: t("navbar_links.home"),
     icon: "i-heroicons-home-solid",
+    to: "/",
   },
   {
     label: t("navbar_links.projects"),
     icon: "i-heroicons-check-badge-16-solid",
+    to: "/portfolio",
   },
   {
     label: t("navbar_links.partners"),
     icon: "i-heroicons-user-group-20-solid",
+    to: "/partners",
   },
   {
     label: t("navbar_links.contact"),
     icon: "i-heroicons-phone-16-solid",
+    to: "/contact",
   },
 ]);
 
@@ -189,3 +193,15 @@ useSchemaOrg([
   </UFooter>
   <UNotifications />
 </template>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+</style>

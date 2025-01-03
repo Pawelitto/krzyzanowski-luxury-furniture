@@ -33,5 +33,10 @@
     "pl-PL": "Polish",
     "en-US": "English",
     "de-DE": "German"
+  },
+  "hero": {
+    "title": "We design and create furniture that harmoniously combines aesthetics with functionality, tailored to any interior.",
+    "subtitle": "In our offer, you will find exceptional:",
+    "animated_words": ["kitchens", "wardrobes", "bedroom furniture", "desks", "shelves"]
   }
 }

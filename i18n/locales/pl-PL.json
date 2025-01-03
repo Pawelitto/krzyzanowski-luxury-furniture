@@ -33,5 +33,10 @@
     "pl-PL": "Polski",
     "en-US": "Angielski",
     "de-DE": "Niemiecki"
+  },
+  "hero": {
+    "title": "Projektujemy i wykonujemy meble, które harmonijnie łączą estetykę z funkcjonalnością, dopasowane do każdego wnętrza.",
+    "subtitle": "W naszej ofercie znajdziesz wyjątkowe:",
+    "animated_words": ["kuchnie", "szafy", "sypialnie", "biurka", "regały"]
   }
 }
