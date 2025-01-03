@@ -8,24 +8,56 @@ const activeWord = computed(() => {
 });
 
 let intervalId;
+let intervalId2;
+
+const currentImageIndex = ref(1);
+
+const currentImage = computed(() => {
+  return `/hero/image${currentImageIndex.value}.png`;
+});
+
+// Obsługuje animację - zapobieganie flickeringowi
+const imageLoaded = ref(false);
+
+// Funkcja uruchamiająca animację po załadowaniu obrazu
+const beforeEnter = () => {
+  imageLoaded.value = false;
+};
+
+const afterLeave = () => {
+  imageLoaded.value = true;
+};
 
 onMounted(() => {
   intervalId = setInterval(() => {
     activeWordIndex.value = (activeWordIndex.value + 1) % words.length;
   }, 5000);
+
+  intervalId2 = setInterval(() => {
+    currentImageIndex.value = (currentImageIndex.value % 11) + 1;
+  }, 5000);
 });
 
 onUnmounted(() => {
   clearInterval(intervalId);
+  clearInterval(intervalId2);
 });
 </script>
 <template>
   <div>
     <div class="w-full h-screen absolute top-0">
-      <NuxtImg
-        src="/hero/image1.png"
-        class="w-full h-full object-cover brightness-50 pointer-events-none"
-      />
+      <transition
+        name="fade"
+        @before-enter="beforeEnter"
+        @after-leave="afterLeave"
+      >
+        <NuxtImg
+          v-if="currentImage"
+          :key="currentImageIndex"
+          :src="currentImage"
+          class="w-full h-full object-cover brightness-50 pointer-events-none image"
+        />
+      </transition>
     </div>
 
     <div class="h-screen">
@@ -41,10 +73,25 @@ onUnmounted(() => {
           <div
             class="mt-6 text-2xl font-medium tracking-tight text-gray-300 dark:text-gray-300"
           >
-            Projektujemy i wykonujemy meble, które harmonijnie łączą estetykę z
-            funkcjonalnością, dopasowane do każdego wnętrza.<br />
+            <span class="hidden md:block">
+              Projektujemy i wykonujemy meble, które harmonijnie łączą estetykę
+              z funkcjonalnością, dopasowane do każdego wnętrza.</span
+            ><br />
             W naszej ofercie znajdziesz wyjątkowe:
-            <span class="inline-block w-[6ch] text-left">
+            <span
+              :key="activeWord"
+              v-motion
+              :initial="{
+                opacity: 0,
+                y: 50,
+              }"
+              :visible="{
+                opacity: 1,
+                y: 0,
+              }"
+              :duration="200"
+              class="inline-block w-[6ch] text-left"
+            >
               {{ activeWord }}
             </span>
           </div>
@@ -84,3 +131,19 @@ onUnmounted(() => {
     />
   </div>
 </template>
+<style scoped>
+.image {
+  transition: opacity 0.9s ease-in-out;
+  opacity: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
