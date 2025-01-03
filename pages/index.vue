@@ -64,6 +64,10 @@ onUnmounted(() => {
         :key="currentImageIndex"
         :src="currentImage"
         class="w-full h-full object-cover brightness-50 pointer-events-none image"
+        quality="80"
+        width="1920"
+        height="1080"
+        format="webp"
       />
     </div>
 
