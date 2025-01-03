@@ -112,7 +112,7 @@ useSchemaOrg([
     </template>
 
     <template #panel>
-      <ul class="space-y-2 px-3">
+      <ul class="space-y-2 py-3">
         <li
           v-for="(item, index) in links"
           :key="item.label"
