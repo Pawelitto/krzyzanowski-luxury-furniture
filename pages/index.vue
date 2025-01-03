@@ -1,10 +1,22 @@
 <script setup lang="ts">
-const words = ["kuchnie", "szafy", "sypialnie", "biurka", "regały"];
+const { t } = useI18n();
+
+const defaultWords = ["", "", "", "", ""];
+
+const words = computed(() => {
+  return [
+    t("hero.animated_words[0]") || defaultWords[0],
+    t("hero.animated_words[1]") || defaultWords[1],
+    t("hero.animated_words[2]") || defaultWords[2],
+    t("hero.animated_words[3]") || defaultWords[3],
+    t("hero.animated_words[4]") || defaultWords[4],
+  ];
+});
 
 const activeWordIndex = ref(0);
 
 const activeWord = computed(() => {
-  return words[activeWordIndex.value];
+  return words.value[activeWordIndex.value] || "";
 });
 
 let intervalId;
@@ -16,10 +28,8 @@ const currentImage = computed(() => {
   return `/hero/image${currentImageIndex.value}.png`;
 });
 
-// Obsługuje animację - zapobieganie flickeringowi
 const imageLoaded = ref(false);
 
-// Funkcja uruchamiająca animację po załadowaniu obrazu
 const beforeEnter = () => {
   imageLoaded.value = false;
 };
@@ -30,7 +40,10 @@ const afterLeave = () => {
 
 onMounted(() => {
   intervalId = setInterval(() => {
-    activeWordIndex.value = (activeWordIndex.value + 1) % words.length;
+    const wordCount = words.value.length;
+    if (wordCount > 0) {
+      activeWordIndex.value = (activeWordIndex.value + 1) % wordCount;
+    }
   }, 5000);
 
   intervalId2 = setInterval(() => {
@@ -46,18 +59,12 @@ onUnmounted(() => {
 <template>
   <div>
     <div class="w-full h-screen absolute top-0">
-      <transition
-        name="fade"
-        @before-enter="beforeEnter"
-        @after-leave="afterLeave"
-      >
-        <NuxtImg
-          v-if="currentImage"
-          :key="currentImageIndex"
-          :src="currentImage"
-          class="w-full h-full object-cover brightness-50 pointer-events-none image"
-        />
-      </transition>
+      <NuxtImg
+        v-if="currentImage"
+        :key="currentImageIndex"
+        :src="currentImage"
+        class="w-full h-full object-cover brightness-50 pointer-events-none image"
+      />
     </div>
 
     <div class="h-screen">
@@ -73,11 +80,9 @@ onUnmounted(() => {
           <div
             class="mt-6 text-2xl font-medium tracking-tight text-gray-300 dark:text-gray-300"
           >
-            <span class="hidden md:block">
-              Projektujemy i wykonujemy meble, które harmonijnie łączą estetykę
-              z funkcjonalnością, dopasowane do każdego wnętrza.</span
+            <span class="hidden md:block"> {{ t("hero.title") }}</span
             ><br />
-            W naszej ofercie znajdziesz wyjątkowe:
+            {{ t("hero.subtitle") }}
             <span
               :key="activeWord"
               v-motion
@@ -90,7 +95,7 @@ onUnmounted(() => {
                 y: 0,
               }"
               :duration="200"
-              class="inline-block w-[6ch] text-left"
+              class="inline-block w-[6ch] text-center md:text-left"
             >
               {{ activeWord }}
             </span>
@@ -106,7 +111,7 @@ onUnmounted(() => {
                 name="i-heroicons-check-badge-16-solid"
                 class="flex-shrink-0 h-5 w-5"
               />
-              <span>Zobacz realizacje</span>
+              <span>{{ t("navbar_links.projects") }}</span>
             </NuxtLink>
             <NuxtLink
               to="/contact"
@@ -116,7 +121,7 @@ onUnmounted(() => {
                 name="i-heroicons-phone-16-solid"
                 class="flex-shrink-0 h-5 w-5"
               />
-              <span>Kontakt</span>
+              <span>{{ t("navbar_links.contact") }}</span>
             </NuxtLink>
           </div>
         </template>

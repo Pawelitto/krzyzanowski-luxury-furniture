@@ -33,5 +33,10 @@
     "pl-PL": "Polnisch",
     "en-US": "Englisch",
     "de-DE": "Deutsch"
+  },
+  "hero": {
+    "title": "Wir entwerfen und fertigen Möbel, die Ästhetik und Funktionalität harmonisch verbinden und perfekt in jeden Raum passen.",
+    "subtitle": "In unserem Angebot finden Sie außergewöhnliche:",
+    "animated_words": ["Küchen", "Schränke", "Schlafzimmermöbel", "Schreibtische", "Regale"]
   }
 }
