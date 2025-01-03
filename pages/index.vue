@@ -1,4 +1,24 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const words = ["kuchnie", "szafy", "sypialnie", "biurka", "regały"];
+
+const activeWordIndex = ref(0);
+
+const activeWord = computed(() => {
+  return words[activeWordIndex.value];
+});
+
+let intervalId;
+
+onMounted(() => {
+  intervalId = setInterval(() => {
+    activeWordIndex.value = (activeWordIndex.value + 1) % words.length;
+  }, 5000);
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId);
+});
+</script>
 <template>
   <div>
     <div class="w-full h-screen absolute top-0">
@@ -19,12 +39,14 @@
         </template>
         <template #description>
           <div
-            class="mt-6 text-lg font-medium tracking-tight text-gray-300 dark:text-gray-300"
+            class="mt-6 text-2xl font-medium tracking-tight text-gray-300 dark:text-gray-300"
           >
             Projektujemy i wykonujemy meble, które harmonijnie łączą estetykę z
             funkcjonalnością, dopasowane do każdego wnętrza.<br />
-            W naszej ofercie znajdziesz wyjątkowe: kuchnie, szafy, sypialnie,
-            biurka, regały
+            W naszej ofercie znajdziesz wyjątkowe:
+            <span class="inline-block w-[6ch] text-left">
+              {{ activeWord }}
+            </span>
           </div>
         </template>
         <template #links>
