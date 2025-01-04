@@ -1,6 +1,80 @@
 <script setup lang="ts">
 const { t } = useI18n();
 
+const testimonials = [
+  {
+    quote: "Nostrud reprehenderit magna deserunt dolor.",
+    author: {
+      name: "Evan you",
+      job: "Creator of Vue.js and Vite",
+      src: "https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/yyx990803",
+    },
+  },
+  {
+    quote:
+      "Irure irure dolore Lorem dolor anim velit id fugiat minim cupidatat dolore nulla Lorem aliquip cillum.",
+    author: {
+      name: "Guillermo Rauch",
+      job: "Co-founder and CEO of Vercel",
+      src: "https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/rauchg",
+    },
+  },
+  {
+    quote:
+      "Magna labore amet velit eiusmod velit dolor cillum sunt est tempor ea commodo fugiat amet tempor.",
+    author: {
+      name: "Addy Osmani",
+      job: "Chief Engineer of Chrome",
+      src: "https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/addyosmani",
+    },
+  },
+  {
+    quote:
+      "Culpa amet do sit officia non magna cillum ullamco dolore qui sunt occaecat.",
+    author: {
+      name: "Sarah Drasner",
+      job: "Director of Engineering, Google",
+      src: "https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/sdras",
+    },
+  },
+  {
+    quote: "Ex veniam eu incididunt.",
+    author: {
+      name: "Dominik Angerer",
+      job: "Co-founder of Storyblok",
+      src: "https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/DominikAngerer",
+    },
+  },
+  {
+    quote:
+      "Nostrud id Lorem laborum ut eiusmod voluptate aliquip non esse sint occaecat.",
+    author: {
+      name: "Savas Vedova",
+      job: "Sernior Frontend Engineer at GitLab",
+      src: "https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/svedova",
+    },
+  },
+];
+
+const faqItems = [
+  {
+    label: t("faq.questions[0].question"),
+    content: t("faq.questions[0].answer"),
+  },
+  {
+    label: t("faq.questions[1].question"),
+    content: t("faq.questions[1].answer"),
+  },
+  {
+    label: t("faq.questions[2].question"),
+    content: t("faq.questions[2].answer"),
+  },
+  {
+    label: t("faq.questions[3].question"),
+    content: t("faq.questions[3].answer"),
+  },
+];
+
 const defaultWords = ["", "", "", "", ""];
 
 const words = computed(() => {
@@ -28,16 +102,6 @@ const currentImage = computed(() => {
   return `/hero/image${currentImageIndex.value}.png`;
 });
 
-const imageLoaded = ref(false);
-
-const beforeEnter = () => {
-  imageLoaded.value = false;
-};
-
-const afterLeave = () => {
-  imageLoaded.value = true;
-};
-
 onMounted(() => {
   intervalId = setInterval(() => {
     const wordCount = words.value.length;
@@ -60,49 +124,52 @@ onUnmounted(() => {
   <div>
     <div class="w-full h-screen absolute top-0">
       <NuxtImg
-        v-if="currentImage"
+        v-motion
+        :initial="{
+          opacity: 0,
+        }"
+        :enter="{
+          opacity: 1,
+        }"
+        :leave="{
+          opacity: 0,
+        }"
+        :duration="0.5"
         :key="currentImageIndex"
         :src="currentImage"
-        class="w-full h-full object-cover brightness-50 pointer-events-none image"
+        class="w-full h-full object-cover brightness-50 pointer-events-none"
         quality="80"
-        width="1920"
-        height="1080"
         format="webp"
+        prerender
       />
     </div>
 
     <div class="h-screen">
-      <ULandingHero :ui="{ title: 'text-white', description: 'text-gray-300' }">
+      <ULandingHero
+        :ui="{
+          title: 'text-white',
+          description: 'text-gray-300',
+          headline: 'mb-5',
+        }"
+      >
+        <template #headline>
+          <NuxtImg
+            src="hero/Logo_furtniture_biale_raster_lowres.png"
+            class="mx-auto w-3/4 md:w-1/3"
+          />
+        </template>
         <template #title>
-          <div
+          <!-- <div
             class="text-5xl font-bold tracking-tight text-gray-200 dark:text-white sm:text-7xl"
           >
             Krzyżanowski Luxury Furniture
-          </div>
+          </div> -->
         </template>
         <template #description>
           <div
             class="mt-6 text-2xl font-medium tracking-tight text-gray-300 dark:text-gray-300"
           >
-            <span class="hidden md:block"> {{ t("hero.title") }}</span
-            ><br />
-            {{ t("hero.subtitle") }}
-            <span
-              :key="activeWord"
-              v-motion
-              :initial="{
-                opacity: 0,
-                y: 50,
-              }"
-              :visible="{
-                opacity: 1,
-                y: 0,
-              }"
-              :duration="200"
-              class="inline-block w-[6ch] text-center md:text-left"
-            >
-              {{ activeWord }}
-            </span>
+            <span class=""> Inspired by excellence </span>
           </div>
         </template>
         <template #links>
@@ -132,27 +199,42 @@ onUnmounted(() => {
       </ULandingHero>
     </div>
 
-    <ULandingSection title="The freedom to build anything" align="left" />
+    <ULandingSection
+      title="The freedom to build anything"
+      icon="i-heroicons-user-group"
+    >
+      <UPageColumns>
+        <UPageCard v-for="(testimonial, index) in testimonials" :key="index">
+          <q class="italic text-gray-500 dark:text-gray-400">
+            {{ testimonial.quote }}
+          </q>
+
+          <div class="flex gap-x-3 items-center mt-3">
+            <UAvatar
+              :src="testimonial.author.src"
+              :alt="testimonial.author.name"
+              size="sm"
+            />
+
+            <div class="min-w-0 text-sm">
+              <p class="font-semibold">
+                {{ testimonial.author.name }}
+              </p>
+              <p class="truncate">
+                {{ testimonial.author.job }}
+              </p>
+            </div>
+          </div>
+        </UPageCard>
+      </UPageColumns>
+    </ULandingSection>
 
     <ULandingSection
-      title="The flexibility to control your data"
-      align="right"
-    />
+      title="Frequently Asked Questions"
+      icon="i-heroicons-question-mark-circle"
+    >
+      <ULandingFAQ :items="faqItems" multiple />
+    </ULandingSection>
   </div>
 </template>
-<style scoped>
-.image {
-  transition: opacity 0.9s ease-in-out;
-  opacity: 1;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease-in-out;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
+<style scoped></style>

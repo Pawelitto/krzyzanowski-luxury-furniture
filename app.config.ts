@@ -10,7 +10,7 @@ export default defineAppConfig({
         background: "var(--color-gray-50)",
       },
       dark: {
-        background: "var(--color-gray-950)",
+        background: "#282828",
       },
     },
     tooltip: {
