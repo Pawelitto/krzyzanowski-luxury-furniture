@@ -109,7 +109,16 @@ const handleAfterLeave = () => {
 };
 
 // Obsługa interwałów w cyklach życia
+const preloadImages = (paths: string[]) => {
+  paths.forEach((path) => {
+    const img = new Image();
+    img.src = path;
+  });
+};
+
+// Obsługa interwałów w cyklach życia
 onMounted(() => {
+  preloadImages(images); // Preloaduj wszystkie obrazy
   intervalId = setInterval(() => {
     isImageVisible.value = false; // Wyzwól animację leave
   }, 10000);
