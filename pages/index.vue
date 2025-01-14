@@ -87,61 +87,59 @@ const words = computed(() => {
   ];
 });
 
-const activeWordIndex = ref(0);
+const images = ["/hero/image1.png", "/hero/image2.png", "/hero/image3.png"];
 
-const activeWord = computed(() => {
-  return words.value[activeWordIndex.value] || "";
-});
+const currentImageIndex = ref(0);
+const isImageVisible = ref(true);
+let intervalId: number | null = null;
 
-let intervalId;
-let intervalId2;
+const currentImage = computed(() => images[currentImageIndex.value]);
 
-const currentImageIndex = ref(1);
+const changeImage = () => {
+  currentImageIndex.value = (currentImageIndex.value + 1) % images.length;
+};
 
-const currentImage = computed(() => {
-  return `/hero/image${currentImageIndex.value}.png`;
-});
+const handleBeforeLeave = () => {
+  isImageVisible.value = false; // Ukryj obraz przed jego zmianą
+};
 
+const handleAfterLeave = () => {
+  changeImage(); // Zmień obraz po zakończeniu animacji leave
+  isImageVisible.value = true; // Przywróć obraz po zmianie
+};
+
+// Obsługa interwałów w cyklach życia
 onMounted(() => {
   intervalId = setInterval(() => {
-    const wordCount = words.value.length;
-    if (wordCount > 0) {
-      activeWordIndex.value = (activeWordIndex.value + 1) % wordCount;
-    }
-  }, 5000);
-
-  intervalId2 = setInterval(() => {
-    currentImageIndex.value = (currentImageIndex.value % 11) + 1;
-  }, 5000);
+    isImageVisible.value = false; // Wyzwól animację leave
+  }, 10000);
 });
 
 onUnmounted(() => {
-  clearInterval(intervalId);
-  clearInterval(intervalId2);
+  if (intervalId) {
+    clearInterval(intervalId); // Wyczyszczenie interwału
+  }
 });
 </script>
 <template>
   <div>
     <div class="w-full h-screen absolute top-0">
-      <NuxtImg
-        v-motion
-        :initial="{
-          opacity: 0,
-        }"
-        :enter="{
-          opacity: 1,
-        }"
-        :leave="{
-          opacity: 0,
-        }"
-        :duration="0.5"
-        :key="currentImageIndex"
-        :src="currentImage"
-        class="w-full h-full object-cover brightness-50 pointer-events-none"
-        quality="80"
-        format="webp"
-        prerender
-      />
+      <Transition
+        name="fade"
+        @before-leave="handleBeforeLeave"
+        @after-leave="handleAfterLeave"
+      >
+        <NuxtImg
+          v-if="isImageVisible"
+          :key="currentImageIndex"
+          :src="currentImage"
+          class="w-full h-full object-cover brightness-50 pointer-events-none"
+          quality="80"
+          format="webp"
+          prerender
+          loading="lazy"
+        />
+      </Transition>
     </div>
 
     <div class="h-screen">
@@ -237,4 +235,28 @@ onUnmounted(() => {
     </ULandingSection>
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-enter-active {
+  transition: opacity 0.4s ease;
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+</style>

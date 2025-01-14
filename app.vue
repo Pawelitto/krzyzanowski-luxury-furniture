@@ -99,6 +99,10 @@ useSchemaOrg([
       },
       preset: 'visible-once',
     }"
+    :ui="{
+      wrapper: 'dark:bg-stone-950/75',
+      panel: { wrapper: 'dark:bg-stone-950' },
+    }"
   >
     <template #logo>
       <ClientOnly>
