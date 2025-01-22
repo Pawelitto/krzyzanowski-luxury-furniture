@@ -69,23 +69,7 @@ const faqItems = [
     label: t("faq.questions[2].question"),
     content: t("faq.questions[2].answer"),
   },
-  {
-    label: t("faq.questions[3].question"),
-    content: t("faq.questions[3].answer"),
-  },
 ];
-
-const defaultWords = ["", "", "", "", ""];
-
-const words = computed(() => {
-  return [
-    t("hero.animated_words[0]") || defaultWords[0],
-    t("hero.animated_words[1]") || defaultWords[1],
-    t("hero.animated_words[2]") || defaultWords[2],
-    t("hero.animated_words[3]") || defaultWords[3],
-    t("hero.animated_words[4]") || defaultWords[4],
-  ];
-});
 
 const images = ["/hero/image1.png", "/hero/image2.png", "/hero/image3.png"];
 

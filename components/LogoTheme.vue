@@ -7,5 +7,9 @@ const image = computed(() =>
 </script>
 
 <template>
-  <NuxtImg :src="image" class="w-auto h-6 text-white" />
+  <div>
+    <NuxtLink to="/">
+      <NuxtImg :src="image" class="w-auto h-6 text-white" />
+    </NuxtLink>
+  </div>
 </template>

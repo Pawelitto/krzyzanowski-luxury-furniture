@@ -75,10 +75,6 @@ useSchemaOrg([
     name: t("faq.questions[2].question"),
     acceptedAnswer: t("faq.questions[2].answer"),
   }),
-  defineQuestion({
-    name: t("faq.questions[3].question"),
-    acceptedAnswer: t("faq.questions[3].answer"),
-  }),
 ]);
 </script>
 
@@ -134,10 +130,15 @@ useSchemaOrg([
             },
             preset: 'visible-once',
           }"
-          class="flex items-center justify-start space-x-3"
+          class="flex items-center justify-start"
         >
-          <UIcon :name="item.icon" class="w-5 h-5" />
-          <ULink>{{ item.label }}</ULink>
+          <ULink
+            :to="item.to"
+            class="flex items-center justify-start space-x-3"
+          >
+            <UIcon :name="item.icon" class="w-5 h-5" />
+            <span>{{ item.label }}</span>
+          </ULink>
         </li>
       </ul>
     </template>
