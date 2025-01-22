@@ -115,8 +115,8 @@ onUnmounted(() => {
 });
 </script>
 <template>
-  <div>
-    <div class="w-full h-screen absolute top-0">
+  <div class="h-screen relative">
+    <div class="w-full h-screen absolute -top-[--header-height]">
       <Transition
         name="fade"
         @before-leave="handleBeforeLeave"
